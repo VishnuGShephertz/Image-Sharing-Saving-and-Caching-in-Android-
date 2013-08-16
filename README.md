@@ -59,9 +59,128 @@ If we want to load image with sampling that we should use in our Android Activit
         imageCacher.loadImage(imageUrl, imgLogo);
 
 ```
+If we want to load image from web or cache we should follow thia code :
 
+```
+      public  Bitmap getBitmap(String url) {
+		String filename = String.valueOf(url.hashCode());
+		File f = new File(cacheDir, filename);
+		// from SD cache
+		Bitmap b;
+		if(isSamplingReq){
+			b = decodeWithoutSampling(f);
+		}
+		else{
+			b = decodewithSampleing(f);
+		}
+	
+		if (b != null)
+			return b;
 
+		// from web
+		try {
+			Bitmap bitmap = null;
+			InputStream is = new URL(url).openStream();
+			OutputStream os = new FileOutputStream(f);
+			Utility.CopyStream(is, os);
+			os.close();
+			if(isSamplingReq){
+				bitmap = decodeWithoutSampling(f);
+			}
+			else{
+				bitmap = decodewithSampleing(f);
+			}
+			return bitmap;
+		} catch (Throwable ex) {
+			 ex.printStackTrace();
+	           if(ex instanceof OutOfMemoryError)
+	              clearCache();
+	           return null;
+		}
+	}
 
+```
 
+Code for Image Sampling :
 
+```
+      private Bitmap decodewithSampleing(File f) {
+		try {
+			// decode image size
+			BitmapFactory.Options o = new BitmapFactory.Options();
+			o.inJustDecodeBounds = true;
+			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+			int width_tmp = o.outWidth, height_tmp = o.outHeight;
+			int scale = 1;
+			while (true) {
+				if (width_tmp / 2 < requiredSize
+						|| height_tmp / 2 < requiredSize)
+					break;
+				width_tmp /= 2;
+				height_tmp /= 2;
+				scale *= 2;
+			}
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+			o2.inSampleSize = scale;
+			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+		} catch (FileNotFoundException e) {
+		}
+		return null;
+	}
 
+```
+
+Code for without Sampling :
+
+```
+       private Bitmap decodeWithoutSampling(File f){
+		try {
+			return BitmapFactory.decodeStream(new FileInputStream(f));
+			
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+```
+
+__Save Image in SD Card Gallery:__ If you want to save Image in Android SD Card Gallery,
+You can follow code written in MainActivty.java file.
+  
+```
+      Bitmap bmImg =imageCacher.getBitmap(imageUrl);
+	        File filename;
+	        try {
+	            String path1 = android.os.Environment.getExternalStorageDirectory().toString();
+	            Log.i("in save()", "after mkdir");
+	            File file=new File(path1 + "/"+appName);
+	            if (!file.exists())
+	            	file.mkdirs();
+	            filename = new File(file.getAbsolutePath()+"/"+imageName+".jpg");
+	            Log.i("in save()", "after file");
+	            FileOutputStream out = new FileOutputStream(filename);
+	            Log.i("in save()", "after outputstream");
+	            bmImg.compress(Bitmap.CompressFormat.JPEG, 90, out);
+	            out.flush();
+	            out.close();
+	            Log.i("in save()", "after outputstream closed");
+	            ContentValues image = new ContentValues();
+	            image.put(Images.Media.TITLE, appName);
+	            image.put(Images.Media.DISPLAY_NAME, imageName);
+	            image.put(Images.Media.DESCRIPTION, "App Image");
+	            image.put(Images.Media.DATE_ADDED, System.currentTimeMillis());
+	            image.put(Images.Media.MIME_TYPE, "image/jpg");
+	            image.put(Images.Media.ORIENTATION, 0);
+	             File parent = filename.getParentFile();
+	             image.put(Images.ImageColumns.BUCKET_ID, parent.toString().toLowerCase().hashCode());
+	             image.put(Images.ImageColumns.BUCKET_DISPLAY_NAME, parent.getName().toLowerCase());
+	             image.put(Images.Media.SIZE, filename.length());
+	             image.put(Images.Media.DATA, filename.getAbsolutePath());
+	             Uri result = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, image);
+	            Toast.makeText(getApplicationContext(),
+	                    "File is Saved in  " + filename, Toast.LENGTH_SHORT).show();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+```
