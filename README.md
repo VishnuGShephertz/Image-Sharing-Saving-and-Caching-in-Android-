@@ -73,10 +73,8 @@ If we want to load image from web or cache we should follow thia code :
 		else{
 			b = decodewithSampleing(f);
 		}
-	
 		if (b != null)
 			return b;
-
 		// from web
 		try {
 			Bitmap bitmap = null;
