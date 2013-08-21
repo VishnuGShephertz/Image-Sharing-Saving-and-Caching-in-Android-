@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_layout"
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content"
+	android:background="#123456">
+	
+		<LinearLayout android:id="@+id/panelIconLeft" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerVertical="true"
+			android:layout_alignParentLeft="true">
+			
+			<Button android:id="@+id/btnHome" 
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"			
+				android:background="@android:drawable/ic_menu_save"			 
+				android:onClick="onSaveClicked" />
+			
+		</LinearLayout>	
+		
+		<TextView android:id="@+id/page_header"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textColor="@android:color/white"
+			android:marqueeRepeatLimit="marquee_forever"
+			android:ellipsize="marquee"
+			android:singleLine="true"
+			android:textSize="20dp"
+			android:text="Image Caching Demo"
+			android:gravity="center"
+			android:layout_toRightOf="@id/panelIconLeft"
+			android:layout_toLeftOf="@+id/panelIconRight"/>			
+		<LinearLayout android:id="@+id/panelIconRight" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_margin="5dp"
+			android:layout_centerVertical="true">
+			<Button android:id="@+id/bt_share"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"			
+				android:background="@android:drawable/ic_menu_share"			 
+				android:onClick="onShareClicked" />
+			
+		</LinearLayout>
+	
+</RelativeLayout>
