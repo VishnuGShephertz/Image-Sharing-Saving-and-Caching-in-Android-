@@ -1,7 +1,7 @@
 Image-Sharing-Saving-and-Caching-in-Android
 ===========================================
 
-Its an Android world and everythis is coming on Android mobile in form of some applications. As we know Images
+Its an Android world and every thing is coming on Android mobile in form of some applications. As we know Images
 are the most important part of the application that makes enhance the UI of application.
 
 # About Sample application
@@ -59,7 +59,7 @@ If we want to load image with sampling that we should use in our Android Activit
         imageCacher.loadImage(imageUrl, imgLogo);
 
 ```
-If we want to load image from web or cache we should follow thia code :
+If we want to load image from web or cache we should follow this code :
 
 ```
       public  Bitmap getBitmap(String url) {
