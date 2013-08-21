@@ -1,8 +1,8 @@
 Image-Sharing-Saving-and-Caching-in-Android
 ===========================================
 
-Its an Android world and every thing is coming on Android mobile in form of some applications. As we know Images
-are the most important part of the application that makes enhance the UI of application.
+Its an Android world and every thing is coming on Android mobile in form of application. As we know Images
+are the most important part of the application that enhance the UI of application.
 
 # About Sample application
 
