@@ -1,9 +1,6 @@
 Image-Sharing-Saving-and-Caching-in-Android
 ===========================================
 
-Its an Android world and every thing is coming on Android mobile in form of application. As we know Images
-are the most important part of the application that enhance the UI of application.
-
 # About Sample application
 
 1. This sample shows how can we load images from web as well as cache images locally.
