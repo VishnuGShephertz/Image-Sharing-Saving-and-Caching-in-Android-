@@ -9,19 +9,21 @@
      android:layout_alignParentTop="true"
      	android:layout_centerHorizontal="true"
     />
+    <Button
+            android:id="@+id/btn_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/upload"
+            android:onClick="onUploadClicked" 
+            android:layout_below="@+id/header_layout"/>
   
-   
-  <RelativeLayout
-  	android:layout_height="match_parent"
-  	android:layout_width="match_parent"
-  	android:layout_below="@+id/btn_load">
     <ImageView 
     	android:id="@+id/my_image" 
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content"
     	android:scaleType="center"
+    	android:layout_below="@+id/btn_load"
     	android:layout_centerInParent="true">
     </ImageView>
-  </RelativeLayout>
-    
+ 
 </RelativeLayout>
