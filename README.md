@@ -14,14 +14,14 @@ Image-Sharing-Saving-and-Caching-in-Android
 1. [Register] (https://apphq.shephertz.com/register) with App42 platform.
 2. Create an app once, you are on Quick start page after registration.
 3. If you are already registered, login to [AppHQ] (http://apphq.shephertz.com) console and create an app from App Manager Tab.
-1. Download the project from [here] (https://github.com/VishnuGShephertz/Image-Sharing-Saving-and-Caching-in-Android-/archive/master.zip) and import it in the eclipse.<br/>
+4. Download the project from [here] (https://github.com/VishnuGShephertz/Image-Sharing-Saving-and-Caching-in-Android-/archive/master.zip) and import it in the eclipse.<br/>
 5. Open MainActivity.java file of sample project and make following changes.
 
 ```
 A. Replace api-Key and secret-Key that you have received in step 2 or 3 at line number 54 and 55.
 ```
-3. Change the application name with your application name in res/strings.
-4. Build and run the application.
+6. Change the application name with your application name in res/strings.
+7. Build and run the application.
 
 
 # Design Details:
